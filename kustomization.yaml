@@ -5,7 +5,7 @@ bases:
 # this two will override existing kubernetes objects
 patchesStrategicMerge:
   # we want to expose ArgoCD service, so we define service type to be LoadBalancer
-  - ./argocd-server-service.yaml
+  - argocd-server-service.yaml
   # in this configmap we can manage RBAC inside of ArgoCD, who can see/do what
   # - ./argocd-rbac-cm.yaml
 
@@ -13,10 +13,11 @@ patchesStrategicMerge:
 resources:
   # This ArgoCD Application enables us to use cascad deployment, we in some way delegate application-specific deployments
   # to the different repository
-  - ./prod-applications.yaml
+  - prod-applications.yaml
   # This Application automates delivery of changes to ArgoCD instance itself
-  - ./self.yaml
+  - self.yaml
   # Here we enforce security measures, so our development and qa teams couldn't create Cluster Roles for example.
   # - ./app-project.yaml
+  - argocd-ingress.yaml
 
 namespace: argocd
