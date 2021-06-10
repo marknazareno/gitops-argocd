@@ -5,6 +5,7 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: "nginx"
     cert-manager.io/cluster-issuer: "letsencrypt"
+    nginx.ingress.kubernetes.io/app-root: "/"
 spec:
   tls:
   - hosts:
@@ -20,4 +21,4 @@ spec:
           service:
             name: argocd-server
             port:
-              name: https
+              name: http
