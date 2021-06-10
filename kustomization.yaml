@@ -9,6 +9,14 @@ patchesStrategicMerge:
   # in this configmap we can manage RBAC inside of ArgoCD, who can see/do what
   # - ./argocd-rbac-cm.yaml
 
+patchesJson6902:
+- path: overlays/production/argocd-server-deploy-command.yaml
+  target:
+    group: apps
+    kind: Deployment
+    name: argocd-server
+    version: v1
+
 # These files are additional, we're creating in order for our installation to be more automated
 resources:
   # This ArgoCD Application enables us to use cascad deployment, we in some way delegate application-specific deployments
